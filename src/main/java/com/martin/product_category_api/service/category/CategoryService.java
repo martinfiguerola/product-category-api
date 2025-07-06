@@ -11,5 +11,7 @@ public interface CategoryService {
     CategoryResponseDTO save (CategoryRequestDTO categoryRequestDTO);
     List<CategoryResponseDTO> findAll ();
     Optional<CategoryResponseDTO> findById (Long id);
+    Optional<CategoryResponseDTO> update (Long id, CategoryRequestDTO categoryRequestDTO);
+    Boolean deleteById (Long id);
 
 }

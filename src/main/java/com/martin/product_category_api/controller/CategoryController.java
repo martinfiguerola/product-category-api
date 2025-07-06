@@ -39,4 +39,18 @@ public class CategoryController {
                 .map(categoryResponseDTO -> ResponseEntity.status(HttpStatus.OK).body(categoryResponseDTO))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryResponseDTO> updateCategory (@PathVariable Long id, @RequestBody CategoryRequestDTO categoryRequestDTO) {
+        return categoryService.update(id, categoryRequestDTO)
+                .map(categoryResponseDTO -> ResponseEntity.status(HttpStatus.OK).body(categoryResponseDTO))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCategory (@PathVariable Long id) {
+        if (categoryService.deleteById(id)) return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category with the given ID does not exist.");
+
+    }
 }
