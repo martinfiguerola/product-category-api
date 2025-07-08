@@ -6,10 +6,9 @@ import com.martin.product_category_api.service.product.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
@@ -25,5 +24,11 @@ public class ProductController {
     public ResponseEntity<ProductResponseDTO> createProduct (@Valid @RequestBody ProductRequestDTO productRequestDTO) {
         ProductResponseDTO responseDTO = productService.save(productRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProductResponseDTO>> getAll () {
+        List<ProductResponseDTO> responseDTOS = productService.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(responseDTOS);
     }
 }

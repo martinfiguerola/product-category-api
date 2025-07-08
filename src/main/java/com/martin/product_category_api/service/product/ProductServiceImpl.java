@@ -6,6 +6,9 @@ import com.martin.product_category_api.dto.product.ProductResponseDTO;
 import com.martin.product_category_api.mapper.ProductMapper;
 import com.martin.product_category_api.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -16,6 +19,7 @@ public class ProductServiceImpl implements ProductService{
         this.productRepository = productRepository;
     }
 
+    @Transactional
     @Override
     public ProductResponseDTO save(ProductRequestDTO productRequestDTO) {
         // Convert the incoming DTO to a Product entity
@@ -26,5 +30,18 @@ public class ProductServiceImpl implements ProductService{
 
         // Convert the persisted Product entity to a DTO for the response
         return ProductMapper.toDTO(savedProduct);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<ProductResponseDTO> findAll() {
+        // Retrieve all products entities from the database.
+        List<Product> products = productRepository.findAll();
+
+        // Convert each entity to DTO and collect into a list.
+        return products.stream()
+                .map(ProductMapper::toDTO)
+                .toList();
+
     }
 }
