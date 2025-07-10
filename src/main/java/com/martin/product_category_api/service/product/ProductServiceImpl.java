@@ -56,4 +56,37 @@ public class ProductServiceImpl implements ProductService{
         return optionalProduct.map(ProductMapper::toDTO);
 
     }
+
+    @Transactional
+    @Override
+    public Optional<ProductResponseDTO> update(Long id, ProductRequestDTO productRequestDTO) {
+        // Fetch the Product entity by its ID from the database.
+        Optional<Product> optionalProduct = productRepository.findById(id);
+
+        // If the Product exists, update its fields, save the changes and convert to DTO.
+        // Otherwise, the Optional remains empty
+        return optionalProduct.map(product -> {
+            product.setName(productRequestDTO.getName());
+            product.setDescription(productRequestDTO.getDescription());
+            product.setPrice(productRequestDTO.getPrice());
+
+            Product updatedProduct = productRepository.save(product);
+
+            return ProductMapper.toDTO(updatedProduct);
+        });
+    }
+
+    @Transactional
+    @Override
+    public Boolean deleteById(Long id) {
+        // Fetch the Product entity by its ID from the database.
+        Optional<Product> optionalProduct = productRepository.findById(id);
+
+        // If the Product entity exists, delete it and return true
+        // Otherwise, the method will return false.
+        return optionalProduct.map(product -> {
+            productRepository.delete(product);
+            return true;
+        }).orElse(false);
+    }
 }

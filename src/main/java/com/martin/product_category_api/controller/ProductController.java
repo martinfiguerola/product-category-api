@@ -40,4 +40,21 @@ public class ProductController {
                 .map(productResponseDTO -> ResponseEntity.status(HttpStatus.OK).body(productResponseDTO))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductResponseDTO> updateProduct (@PathVariable Long id, @Valid @RequestBody ProductRequestDTO productRequestDTO) {
+        Optional<ProductResponseDTO> responseDTOOptional = productService.update(id, productRequestDTO);
+
+        return responseDTOOptional
+                .map(productResponseDTO -> ResponseEntity.status(HttpStatus.OK).body(productResponseDTO))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProduct (@PathVariable Long id) {
+        if (productService.deleteById(id)) return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product with the given ID does not exist.");
+
+    }
 }
