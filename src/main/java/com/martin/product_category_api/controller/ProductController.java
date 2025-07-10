@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/products")
@@ -30,5 +31,13 @@ public class ProductController {
     public ResponseEntity<List<ProductResponseDTO>> getAll () {
         List<ProductResponseDTO> responseDTOS = productService.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(responseDTOS);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponseDTO> getCategory (@PathVariable Long id) {
+        Optional<ProductResponseDTO> responseDTOOptional = productService.findById(id);
+        return responseDTOOptional
+                .map(productResponseDTO -> ResponseEntity.status(HttpStatus.OK).body(productResponseDTO))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }

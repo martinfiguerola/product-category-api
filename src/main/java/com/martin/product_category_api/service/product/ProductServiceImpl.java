@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -42,6 +43,17 @@ public class ProductServiceImpl implements ProductService{
         return products.stream()
                 .map(ProductMapper::toDTO)
                 .toList();
+
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<ProductResponseDTO> findById(Long id) {
+        // Fetch the Product entity by its ID from the database
+        Optional<Product> optionalProduct = productRepository.findById(id);
+
+        // If the product is found, convert it to a DTO; otherwise, the Optional remains empty.
+        return optionalProduct.map(ProductMapper::toDTO);
 
     }
 }
