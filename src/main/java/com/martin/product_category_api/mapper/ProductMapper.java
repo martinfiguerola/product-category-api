@@ -1,6 +1,7 @@
 package com.martin.product_category_api.mapper;
 
 import com.martin.product_category_api.domain.Product;
+import com.martin.product_category_api.dto.product.ProductRefDTO;
 import com.martin.product_category_api.dto.product.ProductRequestDTO;
 import com.martin.product_category_api.dto.product.ProductResponseDTO;
 
@@ -21,5 +22,13 @@ public class ProductMapper {
         productResponseDTO.setDescription(product.getDescription());
         productResponseDTO.setPrice(product.getPrice());
         return productResponseDTO;
+    }
+
+    public static ProductRefDTO toProductRef (Product product) {
+        ProductRefDTO productRefDTO = new ProductRefDTO();
+        productRefDTO.setId(product.getId());
+        productRefDTO.setName(product.getName());
+
+        return productRefDTO;
     }
 }

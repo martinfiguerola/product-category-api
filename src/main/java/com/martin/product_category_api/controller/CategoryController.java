@@ -1,5 +1,6 @@
 package com.martin.product_category_api.controller;
 
+import com.martin.product_category_api.dto.category.CategoryDetailDTO;
 import com.martin.product_category_api.dto.category.CategoryRequestDTO;
 import com.martin.product_category_api.dto.category.CategoryResponseDTO;
 import com.martin.product_category_api.service.category.CategoryService;
@@ -34,9 +35,9 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryResponseDTO> getOne (@PathVariable Long id) {
+    public ResponseEntity<CategoryDetailDTO> getOne (@PathVariable Long id) {
         return categoryService.findById(id)
-                .map(categoryResponseDTO -> ResponseEntity.status(HttpStatus.OK).body(categoryResponseDTO))
+                .map(categoryDetailDTO -> ResponseEntity.status(HttpStatus.OK).body(categoryDetailDTO))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
