@@ -40,7 +40,7 @@ public class CategoryMapper {
                 .map(ProductMapper::toProductRef)
                 .toList();
         // Set the converted product references in the DTO
-        categoryDetailDTO.setProductRefDTOS(productRefDTOS);
+        categoryDetailDTO.setProducts(productRefDTOS);
 
         return categoryDetailDTO;
     }

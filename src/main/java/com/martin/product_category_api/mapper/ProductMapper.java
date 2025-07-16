@@ -5,7 +5,10 @@ import com.martin.product_category_api.dto.product.ProductRefDTO;
 import com.martin.product_category_api.dto.product.ProductRequestDTO;
 import com.martin.product_category_api.dto.product.ProductResponseDTO;
 
+
+
 public class ProductMapper {
+
 
     public static Product fromDTO (ProductRequestDTO productRequestDTO) {
         Product product = new Product();

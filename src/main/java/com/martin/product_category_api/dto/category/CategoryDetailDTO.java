@@ -13,5 +13,5 @@ public class CategoryDetailDTO {
     private Long id;
     private String name;
     private String description;
-    private List<ProductRefDTO> productRefDTOS = new ArrayList<>();
+    private List<ProductRefDTO> products = new ArrayList<>();
 }
