@@ -1,5 +1,6 @@
 package com.martin.product_category_api.controller;
 
+import com.martin.product_category_api.dto.product.ProductDetailDTO;
 import com.martin.product_category_api.dto.product.ProductRequestDTO;
 import com.martin.product_category_api.dto.product.ProductResponseDTO;
 import com.martin.product_category_api.service.product.ProductService;
@@ -34,10 +35,10 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponseDTO> getCategory (@PathVariable Long id) {
-        Optional<ProductResponseDTO> responseDTOOptional = productService.findById(id);
+    public ResponseEntity<ProductDetailDTO> getCategory (@PathVariable Long id) {
+        Optional<ProductDetailDTO> responseDTOOptional = productService.findById(id);
         return responseDTOOptional
-                .map(productResponseDTO -> ResponseEntity.status(HttpStatus.OK).body(productResponseDTO))
+                .map(productDetailDTO -> ResponseEntity.status(HttpStatus.OK).body(productDetailDTO))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 

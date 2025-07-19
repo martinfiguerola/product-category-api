@@ -21,4 +21,5 @@ public class ProductRequestDTO {
     @NotNull
     @DecimalMin("0.01")
     private BigDecimal price;
+    private Long category;
 }

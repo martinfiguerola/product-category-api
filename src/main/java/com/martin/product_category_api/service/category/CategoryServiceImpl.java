@@ -1,6 +1,7 @@
 package com.martin.product_category_api.service.category;
 
 import com.martin.product_category_api.domain.Category;
+import com.martin.product_category_api.dto.category.CategoryDetailDTO;
 import com.martin.product_category_api.dto.category.CategoryRequestDTO;
 import com.martin.product_category_api.dto.category.CategoryResponseDTO;
 import com.martin.product_category_api.mapper.CategoryMapper;
@@ -46,13 +47,13 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<CategoryResponseDTO> findById(Long id) {
+    public Optional<CategoryDetailDTO> findById(Long id) {
         // Step 1: Fetches a category by its ID from the database.
         Optional<Category> optionalCategory = repository.findById(id);
 
         // Step 2: If the category is found, convert it to a DTO and returns it.
         // Otherwise, returns an empty Optional.
-        return optionalCategory.map(CategoryMapper::toDTO);
+        return optionalCategory.map(CategoryMapper::toDTOWithProducts);
     }
 
     @Transactional

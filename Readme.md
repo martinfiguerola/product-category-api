@@ -41,23 +41,23 @@ API will be available at: http://localhost:8080
 
 ### Product Endpoints
 
-| Method  | Endpoint          | Description                  |
-|---------|-------------------|------------------------------|
-| GET     | `/products`       | List all products            |
-| GET     | `/products/{id}`  | Get product by ID            |
-| POST    | `/products`       | Create a new product         |
-| PUT     | `/products/{id}`  | Update an existing product   |
-| DELETE  | `/products/{id}`  | Delete a product             |
+| Method  | Endpoint          | Description                         |
+|---------|-------------------|-------------------------------------|
+| GET     | `/products`       | List all products                   |
+| GET     | `/products/{id}`  | Get product by ID with category ref |
+| POST    | `/products`       | Create a new product                |
+| PUT     | `/products/{id}`  | Update an existing product          |
+| DELETE  | `/products/{id}`  | Delete a product                    |
 
 ### Category Endpoints
 
-| Method  | Endpoint           | Description                 |
-|---------|--------------------|-----------------------------|
-| GET     | `/categories`      | List all categories         |
-| GET     | `/categories/{id}` | Get category by ID          |
-| POST    | `/categories`      | Create a new category       |
-| PUT     | `/categories/{id}` | Update an existing category |
-| DELETE  | `/categories/{id}` | Delete a category           |
+| Method  | Endpoint           | Description                         |
+|---------|--------------------|-------------------------------------|
+| GET     | `/categories`      | List all categories                 |
+| GET     | `/categories/{id}` | Get category by ID with product ref |
+| POST    | `/categories`      | Create a new category               |
+| PUT     | `/categories/{id}` | Update an existing category         |
+| DELETE  | `/categories/{id}` | Delete a category                   |
 
 ---
 
