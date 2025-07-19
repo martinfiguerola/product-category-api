@@ -3,6 +3,7 @@ package com.martin.product_category_api.mapper;
 import com.martin.product_category_api.domain.Category;
 import com.martin.product_category_api.domain.Product;
 import com.martin.product_category_api.dto.category.CategoryDetailDTO;
+import com.martin.product_category_api.dto.category.CategoryRefDTO;
 import com.martin.product_category_api.dto.category.CategoryRequestDTO;
 import com.martin.product_category_api.dto.category.CategoryResponseDTO;
 import com.martin.product_category_api.dto.product.ProductRefDTO;
@@ -44,4 +45,13 @@ public class CategoryMapper {
 
         return categoryDetailDTO;
     }
+
+    public static CategoryRefDTO toCategoryRef (Category category) {
+        CategoryRefDTO categoryRefDTO = new CategoryRefDTO();
+        categoryRefDTO.setId(category.getId());
+        categoryRefDTO.setName(category.getName());
+
+        return categoryRefDTO;
+    }
+
 }

@@ -2,6 +2,7 @@ package com.martin.product_category_api.service.product;
 
 import com.martin.product_category_api.domain.Category;
 import com.martin.product_category_api.domain.Product;
+import com.martin.product_category_api.dto.product.ProductDetailDTO;
 import com.martin.product_category_api.dto.product.ProductRequestDTO;
 import com.martin.product_category_api.dto.product.ProductResponseDTO;
 import com.martin.product_category_api.mapper.ProductMapper;
@@ -63,13 +64,13 @@ public class ProductServiceImpl implements ProductService{
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<ProductResponseDTO> findById(Long id) {
-        // Fetch the Product entity by its ID from the database
+    public Optional<ProductDetailDTO> findById(Long id) {
+        // 1. Fetch the Product entity by its ID from the database
         Optional<Product> optionalProduct = productRepository.findById(id);
 
-        // If the product is found, convert it to a DTO; otherwise, the Optional remains empty.
-        return optionalProduct.map(ProductMapper::toDTO);
-
+        // 2. If the product is found, convert it to a DTO with category
+        // 3. Otherwise, the Optional remains empty.
+         return optionalProduct.map(ProductMapper::toDTOWithCategory);
     }
 
     @Transactional
